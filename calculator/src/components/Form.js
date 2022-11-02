@@ -4,7 +4,7 @@ import TextInput from "./TextInput";
 import Button from "./Button";
 import Box from "./Box";
 import Nav from "./Nav";
-// import Footer from "./Footer";
+import Footer from "./Footer";
 
 class Form extends Component {
   constructor(props) {
@@ -77,7 +77,7 @@ class Form extends Component {
         <div>
           <Box ramaBmi={this.state.bmi} bmiClass={this.state.bmiClass} />
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }

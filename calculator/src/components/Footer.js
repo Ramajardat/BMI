@@ -1,11 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 
-const Footer = () => (
-  <footer className="page-footer font-small blue pt-4 bg-warning">
-    <div className="footer-copyright text-center py-3 ">
-      © 2020 BMI CALCULATOR:
-    </div>
-  </footer>
-);
+class Footer extends Component {
+  state = {};
+  render() {
+    return (
+      <>
+        <footer className="bg-warning text-center text-dark fixed-bottom ">
+          <div className="text-center p-3">© 2022 Copyright</div>
+        </footer>
+      </>
+    );
+  }
+}
 
 export default Footer;
