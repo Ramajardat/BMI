@@ -1,41 +1,34 @@
 // import React from "react";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import TextInput from "./TextInput";
 import Button from "./Button";
 import Box from "./Box";
 import Nav from "./Nav";
 import Footer from "./Footer";
+const healthy = new URL("./Diet-amico.png", import.meta.url);
 
-class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      //   weight: 0,
-      //   height: 0,
-      //   bmiClass: " ",
-      //   bmi: 0,
-    };
-    // this.weightChange = this.weightChange.bind(this);
-    // this.heightChange = this.heightChange.bind(this);
-  }
+function Form() {
+  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [bmiClass, setBmiClass] = useState("");
+  const [bmi, setBmi] = useState(0);
 
-  weightChanged = (weightValue) => {
-    this.setState({ weight: weightValue });
+  const weightChanged = (weightValue) => {
+    setWeight(weightValue);
   };
 
-  heightChanged = (heightValue) => {
-    this.setState({ height: heightValue });
+  const heightChanged = (heightValue) => {
+    setHeight(heightValue);
   };
 
-  computeBmi = () => {
-    let bmiValue =
-      (this.state.weight / this.state.height / this.state.height) * 10000;
-    this.setState({ bmi: bmiValue });
-    let bmiClass = this.getBmi(bmiValue);
-    this.setState({ bmiClass: bmiClass });
+  const computeBmi = () => {
+    let bmiValue = (weight / height / height) * 10000;
+    setBmi(bmiValue);
+    let bmiClass = getBmi(bmiValue);
+    setBmiClass(bmiClass);
   };
 
-  getBmi(bmi) {
+  function getBmi(bmi) {
     if (bmi < 18.5) {
       return "Underweight";
     }
@@ -50,37 +43,43 @@ class Form extends Component {
     }
   }
 
-  render() {
-    return (
-      <div>
-        <Nav />
+  return (
+    <div>
+      <Nav />
 
-        <div className="row m-2">
-          <TextInput
-            label="Height"
-            placeholder="Enter height in meters"
-            onChange={this.heightChanged}
-          />
-        </div>
-        <div className="row m-2">
-          <TextInput
-            label="Weight"
-            placeholder="Enter weight in kg"
-            onChange={this.weightChanged}
-          />
-        </div>
-
-        <div className="row m-2">
-          <Button label="SUBMIT" onClick={this.computeBmi} />
-        </div>
-
-        <div>
-          <Box ramaBmi={this.state.bmi} bmiClass={this.state.bmiClass} />
-        </div>
-        <Footer />
+      <div className="row m-2">
+        <TextInput
+          label="Height"
+          placeholder="Enter height in meters"
+          onChange={heightChanged}
+        />
       </div>
-    );
-  }
+      <div className="row m-2">
+        <TextInput
+          label="Weight"
+          placeholder="Enter weight in kg"
+          onChange={weightChanged}
+        />
+      </div>
+
+      <div className="row m-2">
+        <Button label="SUBMIT" onClick={computeBmi} />
+      </div>
+
+      <div>
+        <Box ramaBmi={bmi} bmiClass={bmiClass} />
+      </div>
+      <div>
+        <img
+          src={healthy}
+          alt=""
+          height={"400px"}
+          style={{ marginLeft: "600px" }}
+        />
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default Form;
